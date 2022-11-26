@@ -675,6 +675,9 @@ def bookingRiwayat(uname):
         mainMenu(uname)
 
 def InterpolationSearch(lys, val):
+    """
+    Fungsi untuk melakukan searching dengan algoritma interpolation search.
+    """
     low = 0
     high = (len(lys) - 1)
     while low <= high and val >= lys[low] and val <= lys[high]:
@@ -688,16 +691,23 @@ def InterpolationSearch(lys, val):
     return -1
 
 def cariPesanan(kode, uname):
+    """
+    Fungsi yang digunakan untuk menampilkan hasil pencarian berdasarkan dengan kode pemesanan.
+    """
     clear()
-
+    # meminta kode semua kode pemesanan
     kdBK = availableData('kodeBooking', uname)
+    # konversi setiap kode dari str ke int
     kdBK = [int(x) for x in kdBK]
+    # meminta semua riwayat pemesanan
     data = availableData('booked', uname)
     indexKode = [x for x in range(len(kdBK))]
+    # melakukan sorting terlebih dahulu
     insertion_sort(kdBK, indexKode)
-
+    # melakukan searching
     index = InterpolationSearch(kdBK, int(kode))
     i = indexKode[index]
+    # menampilkan hasil cari
     print("+==============================================================+")
     print("|                                                              |")
     print("|                        Hasil Pencarian                       |")
