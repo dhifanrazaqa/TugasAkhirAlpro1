@@ -23,3 +23,8 @@ Project tugas akhir mata kuliah Algoritma dan Pemrograman 1
 7. Dictionary
 8. Sort algorithm
 9. Search algorithm
+
+# How to run:
+1. You need to install python first.
+2. open install.bat file to install module.
+3. open run.bat and enjoy.
