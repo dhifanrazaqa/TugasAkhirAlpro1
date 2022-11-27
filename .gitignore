@@ -1,1 +1,3 @@
-*.txt
+booking_storage.txt
+data_storage.txt
+__pycache__

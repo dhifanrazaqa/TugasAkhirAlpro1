@@ -12,7 +12,8 @@ from datetime import datetime, date, time
 import time as waktu
 # module random untuk mengacak sesuatu
 import random
-
+# Import pwinput
+from pwinput import pwinput
 # datetime.today untuk mendapatkan tanggal hari ini
 today = datetime.today()
 # mendefinisikan fungsi lambda yang berisi perintah untuk membersihkan console
@@ -119,7 +120,7 @@ def LoginPage():
             uname = input("Masukkan username lain Anda! (pilih 0 untuk keluar) ")
 
     # input password
-    pw = input("Masukkan password Anda! ")
+    pw = pwinput("Masukkan password Anda! ")
     for line in loginData:
         line = line.replace("\n", "")
         line = line.split()
@@ -175,7 +176,7 @@ def RegisterPage():
             uname = input("Masukkan username lain Anda! (pilih 0 untuk keluar) ")
             
     # Input password
-    pw = input("Masukkan password Anda! ")
+    pw = pwinput("Masukkan password Anda! ")
     while True:
         # validasi password, tidak boleh "0", "", " "
         if pw == '0':main()
