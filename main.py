@@ -54,7 +54,7 @@ def isLogin():
     # cek data_storage dan booking_storage sudah ada atau belum
     # Materi PERT 6 Prak Alpro File dan Exception
     try:
-        with open("data_storage.txt", 'r') as f:pass
+        with open("data_storage.txt", 'r') as f: pass
         with open("booking_storage.txt", 'r'): pass
     except KeyboardInterrupt: os._exit(0)
     except:
@@ -139,14 +139,14 @@ def LoginPage():
                 elif next == '2': RegisterPage()
                 else: main()
 
-def Login(login):
+def Login(uname):
     """
     Fungsi yang mengurus Login dengan mengubah data di data_storage.txt.
     """
     # ketika login terjadi maka string "login()" pada data_storage
     # akan direplace dengan "login(user)"
     with open('data_storage.txt', 'r') as file : filedata = file.read()
-    filedata = filedata.replace('login()', f'login({login})')
+    filedata = filedata.replace('login()', f'login({uname})')
     with open('data_storage.txt', 'w') as file: file.write(filedata)
         
 def RegisterPage():
@@ -196,14 +196,14 @@ def RegisterPage():
     Login(uname)
     mainMenu(uname)
 
-def Logout(login):
+def Logout(uname):
     """
     Fungsi yang mengurus Logout dengan mengubah data di data_storage.txt.
     """
     # ketika login terjadi maka string "login(user)" pada data_storage
     # akan direplace dengan "login()"
     with open('data_storage.txt', 'r') as file : filedata = file.read()
-    filedata = filedata.replace(f'login({login})', 'login()')
+    filedata = filedata.replace(f'login({uname})', 'login()')
     with open('data_storage.txt', 'w') as file: file.write(filedata)
 
 def availableData(data, uname=""):
@@ -249,6 +249,7 @@ def availableData(data, uname=""):
                 if line[0] == uname:
                     book.append(line)
         return book
+    
     # mendapatkan semua kodeBooking dari booking_storage.txt
     elif data == 'kodeBooking':
         kodeBook = []
@@ -389,7 +390,7 @@ def pilihHotelSorted(jenis, uname, sortData=""):
             print("Price from Rp", data.priceJakarta[index if sortData == "harga" else i], "per night")
             print("+--------------------------------------------------------------+\n")
             index += 1
-        
+
         # mengembalikan data yang tadi sudah di sort ke dalam bentuk data awal
         # agar urutannya tidak menjadi berantakan
         if sortData == "harga" : data.priceJakarta = sortListBackup
@@ -532,7 +533,7 @@ def booking(jenis, ans, ans1, uname):
         
         # Menampilkan kalender untuk mempermudah pemesanan
         kalenderNow = calendar.month(today.year, today.month)
-        kalenderNext = calendar.month(today.year, today.month + 1)
+        kalenderNext = calendar.month(today.year+1 if today.month >= 12 else today.year, 1 if today.month >= 12 else today.month+1)
 
         print(kalenderNow)
         print(kalenderNext)
@@ -587,7 +588,7 @@ def booking(jenis, ans, ans1, uname):
         # Menampilkan halaman Konfirmasi Pemesanan
         monthOut = waktu.strptime(CheckOut[1],'%B').tm_mon
         monthIn = waktu.strptime(CheckIn[1],'%B').tm_mon
-        jmlNight = date(2022, monthOut, int(CheckOut[0])) - date(2022, monthIn, int(CheckIn[0]))
+        jmlNight = date(today.year if monthOut >= 12 else today.year+1, monthOut, int(CheckOut[0])) - date(today.year if monthIn >= 12 else today.year+1, monthIn, int(CheckIn[0]))
         totalBayar = harga * jmlNight.days
 
         kodeBooking = f"{int(CheckIn[0])}{monthIn}{int(CheckOut[0])}{monthOut}{idHotel}{idKamar}{today.microsecond}"
