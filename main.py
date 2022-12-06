@@ -707,7 +707,11 @@ def cariPesanan(kode, uname):
     # melakukan sorting terlebih dahulu
     insertion_sort(kdBK, indexKode)
     # melakukan searching
-    index = InterpolationSearch(kdBK, int(kode))
+    if len(kdBK) != 1: 
+        index = InterpolationSearch(kdBK, int(kode))
+    else: 
+        if int(kdBK[0]) == int(kode):
+            index = 0
     i = indexKode[index]
     # menampilkan hasil cari
     print("+==============================================================+")
@@ -777,7 +781,7 @@ def breakfast(uname, ans):
     clear()
     id = int(ans)-1
     data = availableData('booked', uname)
-
+    
     now = datetime.now()
     
     print("+==============================================================+")
